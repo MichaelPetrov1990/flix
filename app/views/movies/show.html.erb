@@ -7,6 +7,9 @@
     <h2>
       <%= formatted_release_date(@movie) %> &bull; <%= @movie.rating %>
     </h2>
+    <div class="reviews">
+      <%= link_to pluralize(@movie.reviews.size, "review"), movie_reviews_path(@movie) %>
+    </div>
     <p>
       <%= @movie.description %>
     </p>
@@ -20,7 +23,6 @@
 <section class="admin">
   <%= link_to "Edit", edit_movie_path(@movie), class: 'button' %>
   <%= link_to "Back to Movies", movies_path, class: 'button' %>
-  <%= link_to "Reviews", movie_reviews_path(@movie), class: 'button' %>
   <%= link_to "Delete", @movie, class: 'button', data: { turbo_method: :delete, turbo_confirm: "Are you sure?" } %>
 </section>
 </section>
