@@ -4,6 +4,7 @@
   </div>
   <div class="details">
     <h1><%= @movie.title %></h1>
+    <%= average_stars(@movie) %>
     <h2>
       <%= formatted_release_date(@movie) %> &bull; <%= @movie.rating %>
     </h2>
