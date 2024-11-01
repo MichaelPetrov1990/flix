@@ -10,8 +10,10 @@
   <%= f.label :password_ %>
   <%= f.password_field :password %>
 
-  <%= f.label :password_confirmation %>
-  <%= f.password_field :password_confirmation %>
+  <% if user.new_record? %>
+  <%= f.submit "Create Account" %>
+  <% else %>
+    <%= f.submit "Update Account" %>
+  <% end %>
   
-  <%= f.submit %>
 <% end %>
