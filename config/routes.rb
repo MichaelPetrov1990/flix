@@ -5,6 +5,9 @@ Rails.application.routes.draw do
   # Defines the root path route ("/")
   root "movies#index"
   get '/routes', to: 'rails/info#routes'
+
+  resource :session, only: [:new, :create, :destroy]
+  get 'sign_in', to: 'sessions#new'
   
   resources :movies do
     resources :reviews
