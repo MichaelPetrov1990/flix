@@ -1,6 +1,6 @@
 class Movie < ApplicationRecord
 
-  has_many :reviews, dependent: :destroy
+  has_many :reviews, -> { order(created_at: :desc) }, dependent: :destroy
   has_many :favorites, dependent: :destroy
   has_many :fans, through: :favorites, source: :user
   has_many :characterizations, dependent: :destroy
@@ -22,12 +22,14 @@ class Movie < ApplicationRecord
     message: "nMeeds to be a valid rating" 
   }
 
+  scope :released, -> { where("released_on < ?", Time.now).order("released_on desc") }
+  scope :upcoming, -> { where("released_on > ?", Time.now).order("released_on asc") }
+  scope :recent, ->(limit=5) { released.limit(limit) }
+  scope :hits, -> { released.where("total_gross >= 300000000").order(total_gross: :desc) }
+  scope :flops, -> { released.where("total_gross < 225000000").order(total_gross: :asc) }
+  
   def flop?
     total_gross < 100000000
-  end
-
-  def self.released
-    Movie.where("released_on < ?", Time.now).order("released_on desc")
   end
 
   def average_stars
