@@ -15,6 +15,10 @@ module MoviesHelper
     end
   end
 
+  def release_date(movie)
+    movie.released_on.strftime(("%d.%m.%Y"))
+  end
+
   def average_stars(movie)
     if movie.average_stars == 0.0
       content_tag(:strong, "No reviews")
