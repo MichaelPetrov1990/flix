@@ -8,6 +8,9 @@
         <%= link_to movie.title, movie %>
       </h2>
       <h3>
+        Release date: <%= release_date(movie) %>
+      </h3>
+      <h3>
         <%= box_office_or_flop(movie) %>
       </h3>
       <p>
