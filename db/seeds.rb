@@ -174,3 +174,9 @@ Movie.create!([
     image_file_name: "wonder-woman.png"
   }
 ])
+
+Genre.destroy_all
+
+genre_names = %w[action comedy drama romance thriller fantasy documentary adventure animation sci-fi].map(&:capitalize)
+
+genre_names.each {|name| Genre.create!(name: name)}
