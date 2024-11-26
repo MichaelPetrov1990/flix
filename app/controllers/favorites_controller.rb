@@ -2,7 +2,7 @@ class FavoritesController < ApplicationController
   before_action :require_signin, only: [:create, :destroy]
   
   def create
-    @movie = Movie.find(params[:movie_id])
+    @movie = Movie.find_by!(slug:(params[:movie_id]))
     @movie.favorites.create!(user: current_user)
     if current_user
       @favorite = current_user.favorites.find_by(movie_id: @movie.id)
